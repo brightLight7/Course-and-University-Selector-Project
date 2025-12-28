@@ -1,0 +1,84 @@
+[
+  {
+    "name": "Persona1",
+    "description": "Spends significant time comparing universities and courses on various platforms, often reviewing the same information without making a decision.",
+    "current_behavior": [
+      "UCAS course listings: This persona frequently compares options on UCAS.",
+      "University websites: This persona frequently compares options on university websites.",
+      "League tables: This persona frequently compares options on league tables.",
+      "PDF prospectuses: This persona frequently compares options on PDF prospectuses."
+    ],
+    "pain_points": [
+      "Information Overload: Struggles to process and compare the vast amount of data available.",
+      "Decision Paralysis: Finds it hard to make a final choice due to constant comparison.",
+      "Redundant Research: Wastes time revisiting the same information without progressing."
+    ],
+    "evidence": [
+      "Questionnaire responses indicating 'too much information on one page'.",
+      "Literature on information overload and decision paralysis.",
+      "Interview feedback highlighting repeated comparison behaviour."
+    ],
+    "reasoning": "This persona emphasises reducing information density and focusing on key differentiators to guide your system's ranking and summarisation strategy."
+  },
+
+  {
+    "name": "Persona3",
+    "description": "Selects courses according to broad interests instead of specific career objectives, and may misinterpret course titles or content.",
+    "current_behavior": [
+      "Keyword searches: This persona frequently uses broad keyword searches.",
+      "Course descriptions on university websites: This persona frequently reads course descriptions.",
+      "YouTube and student blogs: This persona frequently watches YouTube videos and reads student blogs."
+    ],
+    "pain_points": [
+      "Course titles lack clarity: Finds it hard to understand what courses truly entail.",
+      "Assumes prior domain knowledge: Struggles without a clear understanding of subject areas.",
+      "Struggles to map interests to concrete options: Has difficulty linking broad interests to specific courses."
+    ],
+    "evidence": [
+      "Questionnaire responses indicating confusion.",
+      "Interview data showing uncertainty in course understanding.",
+      "Literature on novice decision-makers."
+    ],
+    "reasoning": "This persona supports the use of plain-language explanations and aligns interests with relevant courses."
+  },
+
+  {
+    "name": "Persona4",
+    "description": "Handles decision-making under time pressure, often resulting from missed deadlines or delayed commitments.",
+    "current_behavior": [
+      "Quick Google searches: This persona frequently uses quick Google searches.",
+      "UCAS Clearing pages: This persona frequently checks UCAS Clearing pages.",
+      "Peer recommendations: This persona frequently seeks advice from peers."
+    ],
+    "pain_points": [
+      "Platforms assume long research cycles: Finds it hard to make quick decisions with existing resources.",
+      "Time pressure amplifies anxiety: Feels increased stress when making last-minute choices.",
+      "Difficulty identifying “good enough” choices quickly: Struggles to find satisfactory options under tight deadlines."
+    ],
+    "evidence": [
+      "Questionnaire responses referencing stress.",
+      "Literature on time-constrained decision-making."
+    ],
+    "reasoning": "This persona emphasises early value delivery and minimal friction, which supports your no-login, short-quiz approach."
+  },
+
+  {
+    "name": "Persona5",
+    "description": "Consistently evaluates information reliability and verifies findings using multiple independent sources.",
+    "current_behavior": [
+      "League tables: This persona frequently checks league tables.",
+      "Reddit / student forums: This persona frequently visits Reddit and student forums.",
+      "Official university statistics: This persona frequently reviews official university statistics."
+    ],
+    "pain_points": [
+      "Distrust of marketing-heavy content: Skeptical of promotional materials from universities.",
+      "Difficulty identifying authoritative sources: Struggles to find reliable information.",
+      "Conflicting rankings: Finds it hard to reconcile differing league table results."
+    ],
+    "evidence": [
+      "Questionnaire references to inconsistency.",
+      "Literature on trust in educational platforms."
+    ],
+    "reasoning": "This persona requires transparent reasoning and explainability rather than persuasive language."
+  }
+]
