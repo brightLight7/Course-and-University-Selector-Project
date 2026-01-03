@@ -1,0 +1,162 @@
+[
+  {
+    "id": 1,
+    "name": "University of Oxford",
+    "location": "Oxford, England",
+    "focus": "Humanities, Sciences, PPE",
+    "tuition": "£9,250 (home UG)",
+    "notes": "Collegiate system; strong research output; tutorial model."
+  },
+  {
+    "id": 2,
+    "name": "University of Cambridge",
+    "location": "Cambridge, England",
+    "focus": "STEM, Humanities, Economics",
+    "tuition": "£9,250 (home UG)",
+    "notes": "Collegiate; supervision model; strong maths/engineering."
+  },
+  {
+    "id": 3,
+    "name": "Imperial College London",
+    "location": "London, England",
+    "focus": "Engineering, Medicine, Natural Sciences",
+    "tuition": "£9,250 (home UG)",
+    "notes": "STEM specialist; urban campus; strong industry links."
+  },
+  {
+    "id": 4,
+    "name": "London School of Economics",
+    "location": "London, England",
+    "focus": "Economics, Politics, Social Sciences",
+    "tuition": "£9,250 (home UG)",
+    "notes": "Social science specialist; global student body; policy connections."
+  },
+  {
+    "id": 5,
+    "name": "University College London",
+    "location": "London, England",
+    "focus": "Arts & Humanities, Engineering, Life Sciences",
+    "tuition": "£9,250 (home UG)",
+    "notes": "Large comprehensive university; central London; strong research profile."
+  },
+  {
+    "id": 6,
+    "name": "University of Manchester",
+    "location": "Manchester, England",
+    "focus": "Engineering, Life Sciences, Business",
+    "tuition": "£9,250 (home UG)",
+    "notes": "Russell Group; big campus; active student city."
+  },
+  {
+    "id": 7,
+    "name": "University of Edinburgh",
+    "location": "Edinburgh, Scotland",
+    "focus": "Informatics, Medicine, Humanities",
+    "tuition": "£1,820 (Scot/EU pre-2021), £9,250 (rUK UG)",
+    "notes": "Historic campus; strong AI and medicine; four-year Scottish degrees."
+  },
+  {
+    "id": 8,
+    "name": "University of Glasgow",
+    "location": "Glasgow, Scotland",
+    "focus": "Medicine, Engineering, Social Sciences",
+    "tuition": "£1,820 (Scot/EU pre-2021), £9,250 (rUK UG)",
+    "notes": "Russell Group; large campus; study abroad options."
+  },
+  {
+    "id": 9,
+    "name": "Durham University",
+    "location": "Durham, England",
+    "focus": "Humanities, Sciences, Business",
+    "tuition": "£9,250 (home UG)",
+    "notes": "Collegiate; strong for law, history, natural sciences."
+  },
+  {
+    "id": 10,
+    "name": "University of Warwick",
+    "location": "Coventry, England",
+    "focus": "Economics, Business, Computer Science",
+    "tuition": "£9,250 (home UG)",
+    "notes": "Campus university; strong placements and industrial links."
+  },
+  {
+    "id": 11,
+    "name": "University of Bristol",
+    "location": "Bristol, England",
+    "focus": "Engineering, Law, Life Sciences",
+    "tuition": "£9,250 (home UG)",
+    "notes": "Russell Group; vibrant city; strong research."
+  },
+  {
+    "id": 12,
+    "name": "University of Leeds",
+    "location": "Leeds, England",
+    "focus": "Business, Engineering, Arts",
+    "tuition": "£9,250 (home UG)",
+    "notes": "Large campus; year-in-industry options; student city."
+  },
+  {
+    "id": 13,
+    "name": "University of Southampton",
+    "location": "Southampton, England",
+    "focus": "Engineering, Oceanography, Business",
+    "tuition": "£9,250 (home UG)",
+    "notes": "Strong engineering and maritime focus; research-led."
+  },
+  {
+    "id": 14,
+    "name": "University of Birmingham",
+    "location": "Birmingham, England",
+    "focus": "Medicine, Engineering, Social Sciences",
+    "tuition": "£9,250 (home UG)",
+    "notes": "Redbrick; large campus; good transport links."
+  },
+  {
+    "id": 15,
+    "name": "University of Nottingham",
+    "location": "Nottingham, England",
+    "focus": "Pharmacy, Engineering, Life Sciences",
+    "tuition": "£9,250 (home UG)",
+    "notes": "Park campus; international campuses; strong research."
+  },
+  {
+    "id": 16,
+    "name": "University of York",
+    "location": "York, England",
+    "focus": "Computer Science, History, Biology",
+    "tuition": "£9,250 (home UG)",
+    "notes": "Campus university; collegiate; strong teaching scores."
+  },
+  {
+    "id": 17,
+    "name": "University of Exeter",
+    "location": "Exeter, England",
+    "focus": "Business, Environmental Science, Humanities",
+    "tuition": "£9,250 (home UG)",
+    "notes": "Campus in green setting; strong for environmental subjects."
+  },
+  {
+    "id": 18,
+    "name": "University of St Andrews",
+    "location": "St Andrews, Scotland",
+    "focus": "International Relations, Physics, Humanities",
+    "tuition": "£1,820 (Scot/EU pre-2021), £9,250 (rUK UG)",
+    "notes": "Historic coastal town; strong student satisfaction."
+  },
+  {
+    "id": 19,
+    "name": "Cardiff University",
+    "location": "Cardiff, Wales",
+    "focus": "Journalism, Medicine, Engineering",
+    "tuition": "£9,000 (Wales), £9,250 (England/Scot/NI UG)",
+    "notes": "Russell Group; capital city; strong journalism school."
+  },
+  {
+    "id": 20,
+    "name": "Queen's University Belfast",
+    "location": "Belfast, Northern Ireland",
+    "focus": "Engineering, Medicine, Law",
+    "tuition": "£4,750 (NI), £9,250 (rUK UG)",
+    "notes": "Russell Group; city campus; strong engineering and law."
+  }
+]

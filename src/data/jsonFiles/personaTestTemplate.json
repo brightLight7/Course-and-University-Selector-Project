@@ -1,0 +1,45 @@
+{
+  "questions": [
+    {
+      "question1": "What matters most to you when choosing a course?",
+      "answer": "Career outcomes, Teaching style, Assessment methods, Flexibility, Location"
+    },
+    {
+      "question2": "Which type of course do you prefer?",
+      "answer": "Broad, General, Specialised"
+    },
+    {
+      "question3": "Which outcome matters for you most post studies right now?",
+      "answer": "Career, Further study, Unsure"
+    },
+    {
+      "question4": "Which skills do you feel strongest in?",
+      "answer": "Maths, Essay writing, Programming, Creativity, Problem solving"
+    },
+
+    {
+      "question5": "How confident are you about meeting entry requirements?",
+      "answer": "Low, Medium, High"
+    },
+    {
+      "question6": "Which teaching style do you feel suits you best?",
+      "answer": "Lectures, Seminars, Practical learning, Project-based"
+    },
+    {
+      "question7": "Which assessment style do you prefer?",
+      "answer": "Examination, Coursework, Projects"
+    },
+    {
+      "question8": "Where would you prefer to study?",
+      "answer": "London, Outside London, No Preference"
+    },
+    {
+      "question9": "How important are fees and cost of living in your decision?",
+      "answer": "Not important, Slightly important, No Preference, Important, Very important"
+    },
+    {
+      "question10": "Choose your top three priorities",
+      "answer": "Course content, Employability, University rankings, Student life, Cost, Campus facilities, Supportive services, Course workload and balance"
+    }
+  ]
+}
