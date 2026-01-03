@@ -1,0 +1,202 @@
+[
+  {
+    "id": 1,
+    "course": "Computer Science BSc",
+    "university": "University of Oxford",
+    "discipline": "Computing",
+    "level": "Undergraduate",
+    "duration": "3 years",
+    "entry_requirements": "AAA incl. Maths",
+    "notes": "Focus on algorithms, theory, and systems."
+  },
+  {
+    "id": 2,
+    "course": "Mechanical Engineering MEng",
+    "university": "Imperial College London",
+    "discipline": "Engineering",
+    "level": "Integrated Masters",
+    "duration": "4 years",
+    "entry_requirements": "A*AA incl. Maths and Physics",
+    "notes": "Design, dynamics, thermofluids, group projects."
+  },
+  {
+    "id": 3,
+    "course": "Economics BSc",
+    "university": "London School of Economics",
+    "discipline": "Economics",
+    "level": "Undergraduate",
+    "duration": "3 years",
+    "entry_requirements": "AAA",
+    "notes": "Micro/macro theory, econometrics, policy focus."
+  },
+  {
+    "id": 4,
+    "course": "Medicine MBChB",
+    "university": "University of Edinburgh",
+    "discipline": "Medicine",
+    "level": "Undergraduate",
+    "duration": "5 years",
+    "entry_requirements": "AAA incl. Chemistry",
+    "notes": "Clinical placements from year 3; research-led."
+  },
+  {
+    "id": 5,
+    "course": "Law LLB",
+    "university": "Durham University",
+    "discipline": "Law",
+    "level": "Undergraduate",
+    "duration": "3 years",
+    "entry_requirements": "A*AA",
+    "notes": "Foundations of legal knowledge; mooting opportunities."
+  },
+  {
+    "id": 6,
+    "course": "Business Management BSc",
+    "university": "University of Warwick",
+    "discipline": "Business",
+    "level": "Undergraduate",
+    "duration": "3 years",
+    "entry_requirements": "AAA",
+    "notes": "Strategy, finance, marketing; placement year options."
+  },
+  {
+    "id": 7,
+    "course": "Psychology BSc",
+    "university": "University of Bristol",
+    "discipline": "Psychology",
+    "level": "Undergraduate",
+    "duration": "3 years",
+    "entry_requirements": "AAA",
+    "notes": "Accredited by BPS; stats and research methods heavy."
+  },
+  {
+    "id": 8,
+    "course": "Architecture BA",
+    "university": "University College London",
+    "discipline": "Architecture",
+    "level": "Undergraduate",
+    "duration": "3 years",
+    "entry_requirements": "AAA plus portfolio",
+    "notes": "Design studios, history/theory, model-making."
+  },
+  {
+    "id": 9,
+    "course": "History BA",
+    "university": "University of Cambridge",
+    "discipline": "Humanities",
+    "level": "Undergraduate",
+    "duration": "3 years",
+    "entry_requirements": "A*AA",
+    "notes": "Wide period choice; intensive supervisions."
+  },
+  {
+    "id": 10,
+    "course": "Biological Sciences BSc",
+    "university": "University of Manchester",
+    "discipline": "Life Sciences",
+    "level": "Undergraduate",
+    "duration": "3 years",
+    "entry_requirements": "AAB incl. Biology",
+    "notes": "Lab-heavy; optional industrial/research placement."
+  },
+  {
+    "id": 11,
+    "course": "Civil Engineering BEng",
+    "university": "University of Leeds",
+    "discipline": "Engineering",
+    "level": "Undergraduate",
+    "duration": "3 years",
+    "entry_requirements": "AAB incl. Maths",
+    "notes": "Structures, geotechnics, transport; site visits."
+  },
+  {
+    "id": 12,
+    "course": "English Literature BA",
+    "university": "University of St Andrews",
+    "discipline": "Humanities",
+    "level": "Undergraduate",
+    "duration": "4 years",
+    "entry_requirements": "AAA",
+    "notes": "Modular Scottish system; close reading and theory."
+  },
+  {
+    "id": 13,
+    "course": "Pharmacy MPharm",
+    "university": "University of Nottingham",
+    "discipline": "Health",
+    "level": "Integrated Masters",
+    "duration": "4 years",
+    "entry_requirements": "AAB incl. Chemistry",
+    "notes": "Accredited; clinical placements; pharmaceutics."
+  },
+  {
+    "id": 14,
+    "course": "Aerospace Engineering BEng",
+    "university": "University of Southampton",
+    "discipline": "Engineering",
+    "level": "Undergraduate",
+    "duration": "3 years",
+    "entry_requirements": "AAB incl. Maths and Physics",
+    "notes": "Aerodynamics, propulsion, structures; wind-tunnel labs."
+  },
+  {
+    "id": 15,
+    "course": "International Relations BA",
+    "university": "University of Exeter",
+    "discipline": "Social Sciences",
+    "level": "Undergraduate",
+    "duration": "3 years",
+    "entry_requirements": "AAB",
+    "notes": "IR theory, security, regional studies; year abroad option."
+  },
+  {
+    "id": 16,
+    "course": "Data Science MSc",
+    "university": "University of Glasgow",
+    "discipline": "Computing",
+    "level": "Postgraduate",
+    "duration": "1 year",
+    "entry_requirements": "2:1 in quantitative subject",
+    "notes": "Machine learning, big data, stats; industry links."
+  },
+  {
+    "id": 17,
+    "course": "Environmental Science BSc",
+    "university": "University of York",
+    "discipline": "Environment",
+    "level": "Undergraduate",
+    "duration": "3 years",
+    "entry_requirements": "AAB",
+    "notes": "Ecology, climate science, GIS; fieldwork components."
+  },
+  {
+    "id": 18,
+    "course": "Journalism MA",
+    "university": "Cardiff University",
+    "discipline": "Media",
+    "level": "Postgraduate",
+    "duration": "1 year",
+    "entry_requirements": "2:1 any discipline",
+    "notes": "News writing, broadcast, ethics; strong industry placement."
+  },
+  {
+    "id": 19,
+    "course": "Computer Science with AI BSc",
+    "university": "University of Birmingham",
+    "discipline": "Computing",
+    "level": "Undergraduate",
+    "duration": "3 years",
+    "entry_requirements": "AAB incl. Maths",
+    "notes": "Core CS plus ML/AI modules; group projects."
+  },
+  {
+    "id": 20,
+    "course": "Nursing BSc",
+    "university": "Queen's University Belfast",
+    "discipline": "Health",
+    "level": "Undergraduate",
+    "duration": "3 years",
+    "entry_requirements": "BBB",
+    "notes": "Clinical placements throughout; NMC accredited."
+  }
+]

@@ -1,0 +1,55 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "question": "What matters most to you when choosing a course?",
+      "answer": "Career outcomes"
+    },
+    {
+      "id": 2,
+      "question": "Which type of course do you prefer?",
+      "answer": "Broad"
+    },
+    {
+      "id": 3,
+      "question": "Which outcome matters for you most post studies right now?",
+      "answer": "Career"
+    },
+    {
+      "id": 4,
+      "question": "Which skills do you feel strongest in?",
+      "answer": "Problem solving"
+    },
+
+    {
+      "id": 5,
+      "question": "How confident are you about meeting entry requirements?",
+      "answer": "Medium"
+    },
+    {
+      "id": 6,
+      "question": "Which teaching style do you feel suits you best?",
+      "answer": "Lectures, Project-based"
+    },
+    {
+      "id": 7,
+      "question": "Which assessment style do you prefer?",
+      "answer": "Projects"
+    },
+    {
+      "id": 8,
+      "question": "Where would you prefer to study?",
+      "answer": "No Preference"
+    },
+    {
+      "id": 9,
+      "question": "How important are fees and cost of living in your decision?",
+      "answer": "Important"
+    },
+    {
+      "id": 10,
+      "question": "Choose your top three priorities",
+      "answer": "Course content, Employability, University rankings"
+    }
+  ]
+}
