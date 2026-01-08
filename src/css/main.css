@@ -1,0 +1,30 @@
+#indexContainer {
+  display: flex;
+  font-family: "Inter", sans-serif;
+  flex-direction: column;
+}
+
+#indexHeading {
+  font-size: xx-large;
+  font-weight: 700;
+}
+
+#indexSubHeading {
+  font-size: x-large;
+  font-weight: 600;
+}
+
+#indexText {
+  font-size: medium;
+  font-weight: 400;
+}
+#indexButton {
+  font-size: medium;
+  font-weight: 600;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: progress;
+}
