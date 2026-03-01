@@ -1,4 +1,4 @@
-import { FormWrapper } from "../FormWrapper";
+import { FormWrapper } from "../../FormWrapper";
 
 type QuestionData = {
   question1Answer: string;
@@ -15,6 +15,7 @@ export function Question1Form({
   return (
     <FormWrapper title="What matters most to you when choosing a course?">
       <label>Answer</label>
+
       <input
         required
         type="answer"
