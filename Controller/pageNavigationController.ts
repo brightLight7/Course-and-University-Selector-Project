@@ -1,6 +1,6 @@
 import { useState, type ReactElement } from "react";
 
-export function useMultiStepForm(steps: ReactElement[]) {
+export function pageNavigationController(steps: ReactElement[]) {
   // ------------------------------------ Initialisation ------------------------------------
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   function next() {

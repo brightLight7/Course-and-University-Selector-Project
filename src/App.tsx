@@ -1,8 +1,7 @@
 ﻿import { useState, type FormEvent } from "react";
 //import { AddressForm } from "./View/AddressForm";
 //import { AccountForm } from "./View/AccountForm";
-import { useMultiStepForm } from "./View/useMultiStepForm";
-import { UserForm } from "./View/UserForm";
+import { pageNavigationController } from "../Controller/pageNavigationController";
 import { Question1Form } from "./View/Form/QuestionPages/Question1Form";
 import { Question2Form } from "./View/Form/QuestionPages/Question2Form";
 import { Question3Form } from "./View/Form/QuestionPages/Question3Form";
@@ -103,7 +102,7 @@ function App() {
   // ------------------------------------ Initialisation ------------------------------------
 
   const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } =
-    useMultiStepForm([
+    pageNavigationController([
       // <UserForm {...data} updateFields={updateFields} />,
       // <AddressForm {...data} updateFields={updateFields} />,
       // <AccountForm {...data} updateFields={updateFields} />,
@@ -139,43 +138,74 @@ function App() {
   // ----------------------------------------- View -----------------------------------------
 
   return (
-    <div
-      style={{
-        position: "relative",
-        background: "white",
-        border: "1px solid black",
-        padding: "2rem",
-        margin: "1rem",
-        borderRadius: "0.5rem",
-        fontFamily: "Arial, Helvetica, sans-serif",
-        //maxWidth: "max-content",
-      }}
-    >
-      <form onSubmit={onSubmit}>
-        <div
-          style={{
-            position: "absolute",
-            top: "0.5rem",
-            right: "0.5rem",
-          }}
-        >
-          {currentStepIndex + 1} / {steps.length}
+    // <div
+    //   style={{
+    //     position: "relative",
+    //     background: "white",
+    //     border: "1px solid black",
+    //     padding: "2rem",
+    //     margin: "1rem",
+    //     borderRadius: "0.5rem",
+    //     fontFamily: "Arial, Helvetica, sans-serif",
+    //     //maxWidth: "max-content",
+    //   }}
+    // >
+    //   <form onSubmit={onSubmit}>
+    //     <div
+    //       style={{
+    //         position: "absolute",
+    //         top: "0.5rem",
+    //         right: "0.5rem",
+    //       }}
+    //     >
+    //       {currentStepIndex + 1} / {steps.length}
+    //     </div>
+    //     {step}
+    //     <div
+    //       style={{
+    //         marginTop: "1rem",
+    //         display: "flex",
+    //         gap: "0.5rem",
+    //         justifyContent: "flex-end",
+    //       }}
+    //     >
+    //       {!isFirstStep && (
+    //         <button type="button" onClick={back}>
+    //           Back
+    //         </button>
+    //       )}
+    //       <button id="mainButtons" type="submit">
+    //         {isLastStep ? "Finish" : "Next"}
+    //       </button>
+    //     </div>
+    //   </form>
+    // </div>
+    <div id="app-container">
+      <form id="question-form" onSubmit={onSubmit}>
+        <div id="step-counter">
+          Question {currentStepIndex + 1} of {steps.length}
         </div>
+
         {step}
-        <div
-          style={{
-            marginTop: "1rem",
-            display: "flex",
-            gap: "0.5rem",
-            justifyContent: "flex-end",
-          }}
-        >
+
+        <div id="form-actions">
           {!isFirstStep && (
-            <button type="button" onClick={back}>
+            <button id="back-button" type="button" onClick={back}>
               Back
             </button>
           )}
-          <button type="submit">{isLastStep ? "Finish" : "Next"}</button>
+          <button id="forward-button" type="submit">
+            {isLastStep ? "Finish" : "Next"}
+          </button>
+        </div>
+
+        <div id="progress-bar" aria-hidden="true">
+          <div
+            id="progress-bar-fill"
+            style={{
+              width: `${((currentStepIndex + 1) / steps.length) * 100}%`,
+            }}
+          />
         </div>
       </form>
     </div>

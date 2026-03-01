@@ -52,3 +52,37 @@
   gap: 1rem 0.5rem;
   justify-content: flex-start;
 }
+
+#mainButtons {
+  display: block;
+  margin-left: auto;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+#form-wrapper {
+  padding: 2rem;
+}
+
+#form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+#form-title {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+#form-progress {
+  font-size: 0.9rem;
+  color: #555;
+}
