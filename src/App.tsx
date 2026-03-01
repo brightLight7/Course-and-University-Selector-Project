@@ -1,18 +1,18 @@
 ﻿import { useState, type FormEvent } from "react";
-import { AddressForm } from "./View/AddressForm";
-import { AccountForm } from "./View/AccountForm";
+//import { AddressForm } from "./View/AddressForm";
+//import { AccountForm } from "./View/AccountForm";
 import { useMultiStepForm } from "./View/useMultiStepForm";
 import { UserForm } from "./View/UserForm";
-import { Question1Form } from "./View/Form/Question1Form";
-import { Question2Form } from "./View/Form/Question2Form";
-import { Question3Form } from "./View/Form/Question3Form";
-import { Question4Form } from "./View/Form/Question4Form";
-import { Question5Form } from "./View/Form/Question5Form";
-import { Question6Form } from "./View/Form/Question6Form";
-import { Question7Form } from "./View/Form/Question7Form";
-import { Question8Form } from "./View/Form/Question8Form";
-import { Question9Form } from "./View/Form/Question9Form";
-import { Question10Form } from "./View/Form/Question10Form";
+import { Question1Form } from "./View/Form/QuestionPages/Question1Form";
+import { Question2Form } from "./View/Form/QuestionPages/Question2Form";
+import { Question3Form } from "./View/Form/QuestionPages/Question3Form";
+import { Question4Form } from "./View/Form/QuestionPages/Question4Form";
+import { Question5Form } from "./View/Form/QuestionPages/Question5Form";
+import { Question6Form } from "./View/Form/QuestionPages/Question6Form";
+import { Question7Form } from "./View/Form/QuestionPages/Question7Form";
+import { Question8Form } from "./View/Form/QuestionPages/Question8Form";
+import { Question9Form } from "./View/Form/QuestionPages/Question9Form";
+import { Question10Form } from "./View/Form/QuestionPages/Question10Form";
 
 type FormData = {
   // firstName: string;
@@ -69,6 +69,36 @@ function App() {
     });
   }
 
+  type Submission = FormData & {
+    submittedat: string;
+  };
+
+  // const Submission: Submission = {
+  //   ...data,
+  //   submittedat: new Date().toISOString(),
+  // };
+
+  const STORAGE_KEY = "course_selector_submissions";
+
+  function saveToLocal(data: FormData) {
+    const submission: Submission = {
+      ...data,
+      submittedat: new Date().toISOString(),
+    };
+
+    const existing = JSON.parse(
+      localStorage.getItem(STORAGE_KEY) ?? "[]",
+    ) as Submission[];
+
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify([...existing, submission]),
+    );
+  }
+
+  // alert("Submission saved locally");
+
+  // console.log(submission);
   // ========================================================================================
   // ------------------------------------ Initialisation ------------------------------------
 
@@ -92,9 +122,13 @@ function App() {
 
   function onSubmit(e: FormEvent) {
     e.preventDefault();
-    if (!isLastStep) return next();
-    else {
-      alert("Successful Account Creation");
+    saveToLocal(data);
+
+    if (!isLastStep) {
+      next();
+      return;
+    } else {
+      alert("Finished! Check console for data.");
       console.log(data);
       // Location of where I can handle form submission, e.g., send data to a server (API)
     }
