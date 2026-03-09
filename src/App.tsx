@@ -1,6 +1,4 @@
 ﻿import { useState, type FormEvent } from "react";
-//import { AddressForm } from "./View/AddressForm";
-//import { AccountForm } from "./View/AccountForm";
 import { pageNavigationController } from "../Controller/pageNavigationController";
 import { Question1Form } from "./View/Form/QuestionPages/Question1Form";
 import { Question2Form } from "./View/Form/QuestionPages/Question2Form";
@@ -12,17 +10,9 @@ import { Question7Form } from "./View/Form/QuestionPages/Question7Form";
 import { Question8Form } from "./View/Form/QuestionPages/Question8Form";
 import { Question9Form } from "./View/Form/QuestionPages/Question9Form";
 import { Question10Form } from "./View/Form/QuestionPages/Question10Form";
+import { HomePage } from "./View/HomePage";
 
 type FormData = {
-  // firstName: string;
-  // lastName: string;
-  // age: string;
-  // street: string;
-  // city: string;
-  // state: string;
-  // postalCode: string;
-  // email: string;
-  // password: string;
   question1Answer: string;
   question2Answer: string;
   question3Answer: string;
@@ -36,15 +26,6 @@ type FormData = {
 };
 
 const INITIAL_DATA: FormData = {
-  // firstName: "",
-  // lastName: "",
-  // age: "",
-  // street: "",
-  // city: "",
-  // state: "",
-  // postalCode: "",
-  // email: "",
-  // password: "",
   question1Answer: "",
   question2Answer: "",
   question3Answer: "",
@@ -72,11 +53,6 @@ function App() {
     submittedat: string;
   };
 
-  // const Submission: Submission = {
-  //   ...data,
-  //   submittedat: new Date().toISOString(),
-  // };
-
   const STORAGE_KEY = "course_selector_submissions";
 
   function saveToLocal(data: FormData) {
@@ -95,18 +71,12 @@ function App() {
     );
   }
 
-  // alert("Submission saved locally");
-
-  // console.log(submission);
+  const [hasStartedQuiz, setHasStartedQuiz] = useState(false);
   // ========================================================================================
   // ------------------------------------ Initialisation ------------------------------------
 
   const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } =
     pageNavigationController([
-      // <UserForm {...data} updateFields={updateFields} />,
-      // <AddressForm {...data} updateFields={updateFields} />,
-      // <AccountForm {...data} updateFields={updateFields} />,
-      // ^-- Previous form steps commented out for simplification
       <Question1Form {...data} updateFields={updateFields} />,
       <Question2Form {...data} updateFields={updateFields} />,
       <Question3Form {...data} updateFields={updateFields} />,
@@ -137,49 +107,14 @@ function App() {
 
   // ----------------------------------------- View -----------------------------------------
 
+  if (!hasStartedQuiz) {
+    return (
+      <div id="app-container">
+        <HomePage onStart={() => setHasStartedQuiz(true)} />
+      </div>
+    );
+  }
   return (
-    // <div
-    //   style={{
-    //     position: "relative",
-    //     background: "white",
-    //     border: "1px solid black",
-    //     padding: "2rem",
-    //     margin: "1rem",
-    //     borderRadius: "0.5rem",
-    //     fontFamily: "Arial, Helvetica, sans-serif",
-    //     //maxWidth: "max-content",
-    //   }}
-    // >
-    //   <form onSubmit={onSubmit}>
-    //     <div
-    //       style={{
-    //         position: "absolute",
-    //         top: "0.5rem",
-    //         right: "0.5rem",
-    //       }}
-    //     >
-    //       {currentStepIndex + 1} / {steps.length}
-    //     </div>
-    //     {step}
-    //     <div
-    //       style={{
-    //         marginTop: "1rem",
-    //         display: "flex",
-    //         gap: "0.5rem",
-    //         justifyContent: "flex-end",
-    //       }}
-    //     >
-    //       {!isFirstStep && (
-    //         <button type="button" onClick={back}>
-    //           Back
-    //         </button>
-    //       )}
-    //       <button id="mainButtons" type="submit">
-    //         {isLastStep ? "Finish" : "Next"}
-    //       </button>
-    //     </div>
-    //   </form>
-    // </div>
     <div id="app-container">
       <form id="question-form" onSubmit={onSubmit}>
         <div id="step-counter">
@@ -189,11 +124,20 @@ function App() {
         {step}
 
         <div id="form-actions">
-          {!isFirstStep && (
-            <button id="back-button" type="button" onClick={back}>
-              Back
-            </button>
-          )}
+          <button
+            id="back-button"
+            type="button"
+            onClick={() => {
+              if (isFirstStep) {
+                setHasStartedQuiz(false);
+                return;
+              }
+
+              back();
+            }}
+          >
+            Back
+          </button>
           <button id="forward-button" type="submit">
             {isLastStep ? "Finish" : "Next"}
           </button>

@@ -5,10 +5,17 @@ type FormWrapperProps = {
 
 export function FormWrapper({ title, children }: FormWrapperProps) {
   return (
-    <div>
-      <h1 id="question-title-wrapper-styling">{title}</h1>
-      <h2 id="title-form-wrapper-styling">{title}</h2>
-      <div id="children-form-wrapper-styling">{children}</div>
-    </div>
+    <section id="form-wrapper">
+      <div id="form-layout">
+        <div id="form-visual" aria-hidden="true">
+          <div id="form-visual-badge">Course Finder</div>
+        </div>
+
+        <div id="form-panel">
+          <h1 id="form-title">{title}</h1>
+          <div id="form-content">{children}</div>
+        </div>
+      </div>
+    </section>
   );
 }

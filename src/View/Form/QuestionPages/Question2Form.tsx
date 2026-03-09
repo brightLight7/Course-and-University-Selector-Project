@@ -1,5 +1,7 @@
 import { FormWrapper } from "../../FormWrapper";
 
+const coursePreference = ["Broad", "Specialised", "General"];
+
 type QuestionData = {
   question2Answer: string;
 };
@@ -13,14 +15,26 @@ export function Question2Form({
   updateFields,
 }: QuestionFormProps) {
   return (
-    <FormWrapper title="Which type of course do you prefer?">
-      <label>Answer</label>
-      <input
-        required
-        type="answer"
-        value={question2Answer}
-        onChange={(e) => updateFields({ question2Answer: e.target.value })}
-      />
+    <FormWrapper title="What type of course do you prefer?">
+      <fieldset id="question-options-group">
+        <legend className="sr-only">Choose your top priority</legend>
+
+        {coursePreference.map((priority) => (
+          <label className="question-option" key={priority}>
+            <input
+              required
+              type="radio"
+              name="question2Answer"
+              value={priority}
+              checked={question2Answer === priority}
+              onChange={(e) =>
+                updateFields({ question2Answer: e.target.value })
+              }
+            />
+            <span>{priority}</span>
+          </label>
+        ))}
+      </fieldset>
     </FormWrapper>
   );
 }
