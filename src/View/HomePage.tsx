@@ -8,13 +8,13 @@ export function HomePage({ onStart }: HomePageProps) {
     <section id="home-page">
       <h1 id="home-title">University and Course Selector</h1>
       <div id="home-hero">
-        <div id="home-image">
+        <div id="home-image" className="media-panel">
           <img
             id="home-image-photo"
+            className="media-panel-image"
             src={homeImage}
             alt="Students looking at a laptop together"
           />
-          <div id="home-image-badge">Course Finder</div>
         </div>
         <div id="home-content">
           <h2 id="home-heading">

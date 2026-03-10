@@ -1,5 +1,5 @@
 ﻿import { useState, type FormEvent } from "react";
-import { pageNavigationController } from "../Controller/pageNavigationController";
+import { pageNavigationController } from "./Controller/pageNavigationController";
 import { Question1Form } from "./View/Form/QuestionPages/Question1Form";
 import { Question2Form } from "./View/Form/QuestionPages/Question2Form";
 import { Question3Form } from "./View/Form/QuestionPages/Question3Form";
@@ -22,7 +22,7 @@ type FormData = {
   question7Answer: string;
   question8Answer: string;
   question9Answer: string;
-  question10Answer: string;
+  question10Answer: string[];
 };
 
 const INITIAL_DATA: FormData = {
@@ -35,7 +35,7 @@ const INITIAL_DATA: FormData = {
   question7Answer: "",
   question8Answer: "",
   question9Answer: "",
-  question10Answer: "",
+  question10Answer: [],
 };
 
 function App() {
@@ -75,32 +75,95 @@ function App() {
   // ========================================================================================
   // ------------------------------------ Initialisation ------------------------------------
 
-  const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } =
-    pageNavigationController([
-      <Question1Form {...data} updateFields={updateFields} />,
-      <Question2Form {...data} updateFields={updateFields} />,
-      <Question3Form {...data} updateFields={updateFields} />,
-      <Question4Form {...data} updateFields={updateFields} />,
-      <Question5Form {...data} updateFields={updateFields} />,
-      <Question6Form {...data} updateFields={updateFields} />,
-      <Question7Form {...data} updateFields={updateFields} />,
-      <Question8Form {...data} updateFields={updateFields} />,
-      <Question9Form {...data} updateFields={updateFields} />,
-      <Question10Form {...data} updateFields={updateFields} />,
-    ]);
+  const { currentStepIndex, isFirstStep, isLastStep, back, next } =
+    pageNavigationController(new Array(10).fill(null));
+
+  const formActions = (
+    <>
+      <button
+        id="back-button"
+        type="button"
+        onClick={() => {
+          if (isFirstStep) {
+            setHasStartedQuiz(false);
+            return;
+          }
+
+          back();
+        }}
+      >
+        Back
+      </button>
+      <button id="forward-button" type="submit">
+        {isLastStep ? "Finish" : "Next"}
+      </button>
+    </>
+  );
+
+  const steps = [
+    <Question1Form
+      {...data}
+      updateFields={updateFields}
+      actions={formActions}
+    />,
+    <Question2Form
+      {...data}
+      updateFields={updateFields}
+      actions={formActions}
+    />,
+    <Question3Form
+      {...data}
+      updateFields={updateFields}
+      actions={formActions}
+    />,
+    <Question4Form
+      {...data}
+      updateFields={updateFields}
+      actions={formActions}
+    />,
+    <Question5Form
+      {...data}
+      updateFields={updateFields}
+      actions={formActions}
+    />,
+    <Question6Form
+      {...data}
+      updateFields={updateFields}
+      actions={formActions}
+    />,
+    <Question7Form
+      {...data}
+      updateFields={updateFields}
+      actions={formActions}
+    />,
+    <Question8Form
+      {...data}
+      updateFields={updateFields}
+      actions={formActions}
+    />,
+    <Question9Form
+      {...data}
+      updateFields={updateFields}
+      actions={formActions}
+    />,
+    <Question10Form
+      {...data}
+      updateFields={updateFields}
+      actions={formActions}
+    />,
+  ];
+
+  const step = steps[currentStepIndex];
 
   function onSubmit(e: FormEvent) {
     e.preventDefault();
-    saveToLocal(data);
 
     if (!isLastStep) {
       next();
       return;
-    } else {
-      alert("Finished! Check console for data.");
-      console.log(data);
-      // Location of where I can handle form submission, e.g., send data to a server (API)
     }
+    saveToLocal(data);
+    console.log(data);
   }
 
   // ========================================================================================
@@ -122,26 +185,6 @@ function App() {
         </div>
 
         {step}
-
-        <div id="form-actions">
-          <button
-            id="back-button"
-            type="button"
-            onClick={() => {
-              if (isFirstStep) {
-                setHasStartedQuiz(false);
-                return;
-              }
-
-              back();
-            }}
-          >
-            Back
-          </button>
-          <button id="forward-button" type="submit">
-            {isLastStep ? "Finish" : "Next"}
-          </button>
-        </div>
 
         <div id="progress-bar" aria-hidden="true">
           <div
