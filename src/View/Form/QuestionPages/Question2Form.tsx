@@ -1,4 +1,5 @@
 import { FormWrapper } from "../../FormWrapper";
+import question2Image from "../../../assets/PagePictures/question2-image.jpg";
 
 const coursePreference = ["Broad", "Specialised", "General"];
 
@@ -8,14 +9,20 @@ type QuestionData = {
 
 type QuestionFormProps = QuestionData & {
   updateFields: (fields: Partial<QuestionData>) => void;
+  actions: React.ReactNode;
 };
 
 export function Question2Form({
   question2Answer,
   updateFields,
+  actions,
 }: QuestionFormProps) {
   return (
-    <FormWrapper title="What type of course do you prefer?">
+    <FormWrapper
+      title="What type of course do you prefer?"
+      imageSrc={question2Image}
+      actions={actions}
+    >
       <fieldset id="question-options-group">
         <legend className="sr-only">Choose your top priority</legend>
 

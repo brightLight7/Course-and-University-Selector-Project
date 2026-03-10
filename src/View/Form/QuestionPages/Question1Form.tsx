@@ -1,4 +1,5 @@
 import { FormWrapper } from "../../FormWrapper";
+import question1Image from "../../../assets/PagePictures/question1-image.jpg";
 
 const coursePriorities = [
   "Career outcomes",
@@ -13,14 +14,21 @@ type QuestionData = {
 
 type QuestionFormProps = QuestionData & {
   updateFields: (fields: Partial<QuestionData>) => void;
+  actions: React.ReactNode;
 };
 
 export function Question1Form({
   question1Answer,
   updateFields,
+  actions,
 }: QuestionFormProps) {
   return (
-    <FormWrapper title="1. What matters most to you when choosing a course?">
+    <FormWrapper
+      title="1. What matters most to you when choosing a course?"
+      imageSrc={question1Image}
+      imageAlt="Students looking at a laptop together"
+      actions={actions}
+    >
       <fieldset id="question-options-group">
         {coursePriorities.map((priority) => (
           <label className="question-option" key={priority}>
