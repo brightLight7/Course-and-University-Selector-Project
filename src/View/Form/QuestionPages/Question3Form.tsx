@@ -17,7 +17,7 @@ export function Question3Form({
 }: QuestionFormProps) {
   return (
     <FormWrapper
-      title="Which outcome matters for you most post studies right now?"
+      title="Which outcome matters for you most post-studies right now?"
       imageSrc={question3Image}
       actions={actions}
     >

@@ -24,7 +24,7 @@ export function Question1Form({
 }: QuestionFormProps) {
   return (
     <FormWrapper
-      title="1. What matters most to you when choosing a course?"
+      title="What matters most to you when choosing a course?"
       imageSrc={question1Image}
       imageAlt="Students looking at a laptop together"
       actions={actions}
