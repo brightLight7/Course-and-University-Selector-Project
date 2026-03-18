@@ -3,8 +3,6 @@ from model.queries import (
     get_user_answers,
     get_courses,
     get_universities,
-    get_courses,
-    get_universities,
     save_course_recommendation,
     save_university_recommendation
 )
@@ -27,7 +25,3 @@ def run_recommendation_pipeline(attempt_id):
 
     return mapped_recommendations
 
-
-if __name__ == "__main__":
-    result = run_recommendation_pipeline(1)
-    print(result)

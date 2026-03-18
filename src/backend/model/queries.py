@@ -4,8 +4,7 @@ def get_user_answers(attempt_id): # Define a function to retrieve user answers b
     connection = get_db_connection() # Get a connection to the database
     cursor_connection = connection.cursor() # Create a cursor object to execute SQL queries
     
-    cursor_connection.execute
-    (
+    cursor_connection.execute(
         """SELECT q.question_text, ao.option_text
         FROM user_answers ua
         JOIN questions q ON ua.question_id = q.question_id
@@ -30,8 +29,7 @@ def get_courses():
     connection = get_db_connection()
     cursor_connection = connection.cursor()
 
-    cursor_connection.execute
-    (
+    cursor_connection.execute(
         """
         SELECT 
             c.course_id, 
@@ -72,8 +70,7 @@ def get_universities():
     connection = get_db_connection()
     cursor_connection = connection.cursor()
 
-    cursor_connection.execute
-    (
+    cursor_connection.execute(
         """
         SELECT 
             university_id, 
@@ -104,8 +101,7 @@ def save_course_recommendation(attempt_id, recommended_courses):
     cursor_connection = connection.cursor()
 
     for course in recommended_courses:
-        cursor_connection.execute
-        (
+        cursor_connection.execute(
             """
             INSERT INTO course_results (attempt_id, course_id, rank_position, suitability_score, explanation)
             VALUES (%s, %s, %s, %s, %s)
@@ -126,8 +122,7 @@ def save_university_recommendation(attempt_id, recommended_universities):
     cursor_connection = connection.cursor()
 
     for university in recommended_universities:
-        cursor_connection.execute
-        (
+        cursor_connection.execute(
             """
             INSERT INTO university_results (attempt_id, university_id, rank_position, suitability_score, explanation)
             VALUES (%s, %s, %s, %s, %s)
