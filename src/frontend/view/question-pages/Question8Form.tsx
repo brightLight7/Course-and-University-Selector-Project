@@ -1,5 +1,5 @@
-import { FormWrapper } from "../../FormWrapper";
-import question8Image from "../../../assets/PagePictures/question8-image.jpg";
+import { FormWrapper } from "../FormWrapper";
+import question8Image from "../../../assets/page-pictures/question8-image.jpg";
 
 const locationPreference = [
   // "London",

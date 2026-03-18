@@ -1,5 +1,5 @@
-import { FormWrapper } from "../../FormWrapper";
-import question1Image from "../../../assets/PagePictures/question1-image.jpg";
+import { FormWrapper } from "../FormWrapper";
+import question1Image from "../../../assets/page-pictures/question1-image.jpg";
 
 const coursePriorities = [
   "Career outcomes",

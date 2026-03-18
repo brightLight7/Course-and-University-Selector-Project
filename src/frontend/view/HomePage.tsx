@@ -1,4 +1,4 @@
-import homeImage from "../assets/PagePictures/HomePage/home-image.png";
+import homeImage from "../../assets/page-pictures/home-page/home-image.png";
 type HomePageProps = {
   onStart: () => void;
 };

@@ -1,10 +1,10 @@
-import { FormWrapper } from "../../FormWrapper";
-import question7Image from "../../../assets/PagePictures/question7-image.jpg";
+import { FormWrapper } from "../FormWrapper";
+import question2Image from "../../../assets/page-pictures/question2-image.jpg";
 
-const assessmentStylePreference = ["Examination", "Coursework", "Projects"];
+const coursePreference = ["Broad", "Specialised", "General"];
 
 type QuestionData = {
-  question7Answer: string;
+  question2Answer: string;
 };
 
 type QuestionFormProps = QuestionData & {
@@ -12,30 +12,30 @@ type QuestionFormProps = QuestionData & {
   actions: React.ReactNode;
 };
 
-export function Question7Form({
-  question7Answer,
+export function Question2Form({
+  question2Answer,
   updateFields,
   actions,
 }: QuestionFormProps) {
   return (
     <FormWrapper
-      title="Which assessment style do you prefer?"
-      imageSrc={question7Image}
+      title="What type of course do you prefer?"
+      imageSrc={question2Image}
       actions={actions}
     >
       <fieldset id="question-options-group">
         <legend className="sr-only">Choose your top priority</legend>
 
-        {assessmentStylePreference.map((priority) => (
+        {coursePreference.map((priority) => (
           <label className="question-option" key={priority}>
             <input
               required
               type="radio"
-              name="question7Answer"
+              name="question2Answer"
               value={priority}
-              checked={question7Answer === priority}
+              checked={question2Answer === priority}
               onChange={(e) =>
-                updateFields({ question7Answer: e.target.value })
+                updateFields({ question2Answer: e.target.value })
               }
             />
             <span>{priority}</span>

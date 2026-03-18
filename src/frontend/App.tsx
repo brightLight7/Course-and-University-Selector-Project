@@ -1,16 +1,16 @@
-﻿import { useState, type FormEvent } from "react";
-import { pageNavigationController } from "./Controller/pageNavigationController";
-import { Question1Form } from "./View/Form/QuestionPages/Question1Form";
-import { Question2Form } from "./View/Form/QuestionPages/Question2Form";
-import { Question3Form } from "./View/Form/QuestionPages/Question3Form";
-import { Question4Form } from "./View/Form/QuestionPages/Question4Form";
-import { Question5Form } from "./View/Form/QuestionPages/Question5Form";
-import { Question6Form } from "./View/Form/QuestionPages/Question6Form";
-import { Question7Form } from "./View/Form/QuestionPages/Question7Form";
-import { Question8Form } from "./View/Form/QuestionPages/Question8Form";
-import { Question9Form } from "./View/Form/QuestionPages/Question9Form";
-import { Question10Form } from "./View/Form/QuestionPages/Question10Form";
-import { HomePage } from "./View/HomePage";
+import { useState, type FormEvent } from "react";
+import { pageNavigationController } from "./controller/pageNavigationController";
+import { Question1Form } from "./view/question-pages/Question1Form";
+import { Question2Form } from "./view/question-pages/Question2Form";
+import { Question3Form } from "./view/question-pages/Question3Form";
+import { Question4Form } from "./view/question-pages/Question4Form";
+import { Question5Form } from "./view/question-pages/Question5Form";
+import { Question6Form } from "./view/question-pages/Question6Form";
+import { Question7Form } from "./view/question-pages/Question7Form";
+import { Question8Form } from "./view/question-pages/Question8Form";
+import { Question9Form } from "./view/question-pages/Question9Form";
+import { Question10Form } from "./view/question-pages/Question10Form";
+import { HomePage } from "./view/HomePage";
 
 type FormData = {
   question1Answer: string;
@@ -39,8 +39,6 @@ const INITIAL_DATA: FormData = {
 };
 
 function App() {
-  // --------------------------------------- State(s) ---------------------------------------
-
   const [data, setData] = useState(INITIAL_DATA);
 
   function updateFields(fields: Partial<FormData>) {
@@ -72,8 +70,6 @@ function App() {
   }
 
   const [hasStartedQuiz, setHasStartedQuiz] = useState(false);
-  // ========================================================================================
-  // ------------------------------------ Initialisation ------------------------------------
 
   const { currentStepIndex, isFirstStep, isLastStep, back, next } =
     pageNavigationController(new Array(10).fill(null));
@@ -166,10 +162,6 @@ function App() {
     console.log(data);
   }
 
-  // ========================================================================================
-
-  // ----------------------------------------- View -----------------------------------------
-
   if (!hasStartedQuiz) {
     return (
       <div id="app-container">
@@ -197,13 +189,6 @@ function App() {
       </form>
     </div>
   );
-  // ----------------------------------------------------------------------------------------
 }
-export default App;
 
-// ----------------------------------------------------------------------------------------
-// ------------------------------------ Initialisation ------------------------------------
-// --------------------------------------- State(s) ---------------------------------------
-// -------------------------------------- Handler(s) --------------------------------------
-// ----------------------------------------- View -----------------------------------------
-// ----------------------------------------------------------------------------------------
+export default App;

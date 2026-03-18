@@ -1,16 +1,15 @@
-import { FormWrapper } from "../../FormWrapper";
-import question9Image from "../../../assets/PagePictures/question9-image.jpg";
+import { FormWrapper } from "../FormWrapper";
+import question6Image from "../../../assets/page-pictures/question6-image.jpg";
 
-const importanceLevels = [
-  "Not important",
-  "Slightly important",
-  "No Preference",
-  "Important",
-  "Very important",
+const teachingStylePreference = [
+  "Lectures",
+  "Seminars",
+  "Practical learning",
+  "Project-based",
 ];
 
 type QuestionData = {
-  question9Answer: string;
+  question6Answer: string;
 };
 
 type QuestionFormProps = QuestionData & {
@@ -18,30 +17,30 @@ type QuestionFormProps = QuestionData & {
   actions: React.ReactNode;
 };
 
-export function Question9Form({
-  question9Answer,
+export function Question6Form({
+  question6Answer,
   updateFields,
   actions,
 }: QuestionFormProps) {
   return (
     <FormWrapper
-      title="How important are fees and cost of living in your decision?"
-      imageSrc={question9Image}
+      title="Which teaching style do you feel suits you best?"
+      imageSrc={question6Image}
       actions={actions}
     >
       <fieldset id="question-options-group">
         <legend className="sr-only">Choose your top priority</legend>
 
-        {importanceLevels.map((priority) => (
+        {teachingStylePreference.map((priority) => (
           <label className="question-option" key={priority}>
             <input
               required
               type="radio"
-              name="question9Answer"
+              name="question6Answer"
               value={priority}
-              checked={question9Answer === priority}
+              checked={question6Answer === priority}
               onChange={(e) =>
-                updateFields({ question9Answer: e.target.value })
+                updateFields({ question6Answer: e.target.value })
               }
             />
             <span>{priority}</span>

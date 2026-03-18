@@ -1,5 +1,5 @@
-import { FormWrapper } from "../../FormWrapper";
-import question10Image from "../../../assets/PagePictures/question10-image.jpg";
+import { FormWrapper } from "../FormWrapper";
+import question10Image from "../../../assets/page-pictures/question10-image.jpg";
 const topThreePriorities = [
   "Course content",
   "University ranking",

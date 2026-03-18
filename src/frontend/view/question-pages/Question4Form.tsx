@@ -1,8 +1,15 @@
-import { FormWrapper } from "../../FormWrapper";
-import question3Image from "../../../assets/PagePictures/question3-image.jpg";
-const outcomePreference = ["Career", "Further study", "Unsure"];
+import { FormWrapper } from "../FormWrapper";
+import question4Image from "../../../assets/page-pictures/question4-image.jpg";
+const skillsPreference = [
+  "Maths",
+  "Essay writing",
+  "Programming",
+  "Creativity",
+  "Problem solving",
+];
+
 type QuestionData = {
-  question3Answer: string;
+  question4Answer: string;
 };
 
 type QuestionFormProps = QuestionData & {
@@ -10,30 +17,30 @@ type QuestionFormProps = QuestionData & {
   actions: React.ReactNode;
 };
 
-export function Question3Form({
-  question3Answer,
+export function Question4Form({
+  question4Answer,
   updateFields,
   actions,
 }: QuestionFormProps) {
   return (
     <FormWrapper
-      title="Which outcome matters for you most post-studies right now?"
-      imageSrc={question3Image}
+      title="Which skills do you feel strongest in?"
+      imageSrc={question4Image}
       actions={actions}
     >
       <fieldset id="question-options-group">
         <legend className="sr-only">Choose your top priority</legend>
 
-        {outcomePreference.map((priority) => (
+        {skillsPreference.map((priority) => (
           <label className="question-option" key={priority}>
             <input
               required
               type="radio"
-              name="question3Answer"
+              name="question4Answer"
               value={priority}
-              checked={question3Answer === priority}
+              checked={question4Answer === priority}
               onChange={(e) =>
-                updateFields({ question3Answer: e.target.value })
+                updateFields({ question4Answer: e.target.value })
               }
             />
             <span>{priority}</span>
