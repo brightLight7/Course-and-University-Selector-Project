@@ -1,4 +1,4 @@
-import { use, useState, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import { pageNavigationController } from "./controller/pageNavigationController";
 import { Question1Form } from "./view/question-pages/Question1Form";
 import { Question2Form } from "./view/question-pages/Question2Form";
@@ -10,7 +10,6 @@ import { Question7Form } from "./view/question-pages/Question7Form";
 import { Question8Form } from "./view/question-pages/Question8Form";
 import { Question9Form } from "./view/question-pages/Question9Form";
 import { Question10Form } from "./view/question-pages/Question10Form";
-import type { RecommendationSet } from "./types/RecommendationSet";
 import { HomePage } from "./view/HomePage";
 
 type FormData = {
@@ -41,13 +40,6 @@ const INITIAL_DATA: FormData = {
 
 function App() {
   const [data, setData] = useState(INITIAL_DATA);
-
-  const [screen, setScreen] = useState<"home" | "quiz" | "loading" | "result">(
-    "home",
-  );
-
-  const [result, setResult] = useState<RecommendationSet | null>(null);
-  const [submissionError, setSubmissionError] = useState<string | null>(null);
 
   function updateFields(fields: Partial<FormData>) {
     setData((prev) => {
@@ -159,33 +151,18 @@ function App() {
 
   const step = steps[currentStepIndex];
 
-  async function onSubmit(e: FormEvent) {
+  function onSubmit(e: FormEvent) {
     e.preventDefault();
 
     if (!isLastStep) {
       next();
       return;
     }
-    // saveToLocal(data);
-    // console.log(data);
 
-    setSubmissionError(null);
-    setScreen("loading");
-    try {
-      const generatedResults = await generatedRecommendations(data);
-      setResults(generatedResults);
-      setScreen("result");
-    } catch (error) {
-      const message =
-        error instanceof Error
-          ? error.message
-          : "We could not generate recommendations at this time. Please try again later.";
-      setSubmissionError(message);
-      setScreen("quiz");
-    }
-  }
-
-  
+    saveToLocal(data);
+    window.alert(
+      "Quiz submitted. Recommendation generation will be connected next.",
+    );
   }
 
   if (!hasStartedQuiz) {
