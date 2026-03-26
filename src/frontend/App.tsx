@@ -11,6 +11,10 @@ import { Question8Form } from "./view/question-pages/Question8Form";
 import { Question9Form } from "./view/question-pages/Question9Form";
 import { Question10Form } from "./view/question-pages/Question10Form";
 import { HomePage } from "./view/HomePage";
+import type { RecommendationSet } from "./types/recommendations";
+import { generateRecommendations } from "./services/recommendations";
+import { LoadingScreen } from "./view/LoadingScreen";
+import { ResultsPage } from "./view/ResultsPage";
 
 type FormData = {
   question1Answer: string;
@@ -41,6 +45,13 @@ const INITIAL_DATA: FormData = {
 function App() {
   const [data, setData] = useState(INITIAL_DATA);
 
+  const [screen, setScreen] = useState<"home" | "quiz" | "loading" | "results">(
+    "home",
+  );
+
+  const [results, setResults] = useState<RecommendationSet | null>(null);
+  const [submissionError, setSubmissionError] = useState<string | null>(null);
+
   function updateFields(fields: Partial<FormData>) {
     setData((prev) => {
       return { ...prev, ...fields };
@@ -69,9 +80,7 @@ function App() {
     );
   }
 
-  const [hasStartedQuiz, setHasStartedQuiz] = useState(false);
-
-  const { currentStepIndex, isFirstStep, isLastStep, back, next } =
+  const { currentStepIndex, isFirstStep, isLastStep, back, next, goTo } =
     pageNavigationController(new Array(10).fill(null));
 
   const formActions = (
@@ -81,7 +90,7 @@ function App() {
         type="button"
         onClick={() => {
           if (isFirstStep) {
-            setHasStartedQuiz(false);
+            setScreen("home");
             return;
           }
 
@@ -151,7 +160,7 @@ function App() {
 
   const step = steps[currentStepIndex];
 
-  function onSubmit(e: FormEvent) {
+  async function onSubmit(e: FormEvent) {
     e.preventDefault();
 
     if (!isLastStep) {
@@ -159,16 +168,55 @@ function App() {
       return;
     }
 
-    saveToLocal(data);
-    window.alert(
-      "Quiz submitted. Recommendation generation will be connected next.",
-    );
+    setSubmissionError(null);
+    setScreen("loading");
+
+    try {
+      const generatedResults = await generateRecommendations(data);
+      setResults(generatedResults);
+      setScreen("results");
+    } catch (error) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : "We could not generate recommendations right now.";
+
+      setSubmissionError(message);
+      setScreen("quiz");
+    }
   }
 
-  if (!hasStartedQuiz) {
+  function handleAdjustPreferences() {
+    setScreen("quiz");
+    goTo(0);
+  }
+
+  function handleCreateAccountLogin() {
+    window.alert("Login and saving results will be connected next.");
+  }
+
+  if (screen === "home") {
     return (
       <div id="app-container">
-        <HomePage onStart={() => setHasStartedQuiz(true)} />
+        <HomePage onStart={() => setScreen("quiz")} />
+      </div>
+    );
+  }
+  if (screen === "loading") {
+    return (
+      <div id="app-container">
+        <LoadingScreen />
+      </div>
+    );
+  }
+  if (screen === "results" && results) {
+    return (
+      <div id="app-container">
+        <ResultsPage
+          results={results}
+          onAdjustPreferences={handleAdjustPreferences}
+          onCreateAccountLogin={handleCreateAccountLogin}
+        />
       </div>
     );
   }
@@ -178,6 +226,12 @@ function App() {
         <div id="step-counter">
           Question {currentStepIndex + 1} of {steps.length}
         </div>
+
+        {submissionError ? (
+          <p id="submission-error" role="alert">
+            {submissionError}
+          </p>
+        ) : null}
 
         {step}
 

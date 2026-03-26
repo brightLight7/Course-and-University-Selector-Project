@@ -1,0 +1,63 @@
+#results-page {
+  display: grid;
+  gap: 2rem;
+}
+
+#results-title {
+  margin: 0;
+  font-size: clamp(2.3rem, 3.4vw, 3.6rem);
+  color: #111;
+  text-align: center;
+}
+
+#results-subtitle {
+  max-width: 48rem;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  color: #383838;
+  text-align: center;
+}
+
+.results-section-title {
+  margin: 0;
+  font-size: clamp(1.6rem, 2.2vw, 2.1rem);
+  color: #111;
+  text-align: center;
+}
+
+.results-grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.result-card {
+  padding: 1.5rem;
+  border: 1px solid #d0d0d0;
+  border-radius: 1.5rem;
+  background: #f7f7f7;
+}
+
+#results-actions {
+  display: grid;
+  gap: 1rem;
+}
+
+#results-login-button,
+#results-adjust-button {
+  width: 100%;
+  padding: 1.1rem 1.75rem;
+  border: 0;
+  border-radius: 1.25rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+#results-login-button {
+  background: #050505;
+  color: #fff;
+}
+
+#results-adjust-button {
+  background: #d9d9d9;
+  color: #111;
+}
