@@ -1,15 +1,28 @@
-import type { RecommendationSet } from "../types/recommendations";
+import type { RecommendationSet, CourseRecommendation, UniversityRecommendation } from "../types/recommendations";
+
+type SaveStatus = "idle" | "saving" | "saved" | "error";
 
 type ResultsPageProps = {
   results: RecommendationSet;
+  saveStatus: SaveStatus;
   onAdjustPreferences: () => void;
   onCreateAccountLogin: () => void;
+  onMoreInfo: (item: CourseRecommendation | UniversityRecommendation) => void;
+};
+
+const saveButtonLabel: Record<SaveStatus, string> = {
+  idle: "Create an Account / Login",
+  saving: "Saving...",
+  saved: "Results Saved",
+  error: "Save Failed — Try Again",
 };
 
 export function ResultsPage({
   results,
+  saveStatus,
   onAdjustPreferences,
   onCreateAccountLogin,
+  onMoreInfo,
 }: ResultsPageProps) {
   return (
     <section id="results-page">
@@ -27,8 +40,27 @@ export function ResultsPage({
           <article className="result-card" key={course.courseName}>
             <h3>{course.courseName}</h3>
             <p>{course.universityName}</p>
-            <p>Suitability: {course.suitabilityScore}</p>
+            <p>Suitability: {course.suitabilityScore}%</p>
             <p>{course.explanation}</p>
+            <button type="button" className="result-card-more-btn" onClick={() => onMoreInfo(course)}>
+              More Information
+            </button>
+          </article>
+        ))}
+      </div>
+
+      <h2 className="results_Section-title">
+        Our 3 University Recommendations for you
+      </h2>
+      <div className="results-grid">
+        {results.recommendedUniversities.map((uni) => (
+          <article className="result-card" key={uni.universityName}>
+            <h3>{uni.universityName}</h3>
+            <p>Suitability: {uni.suitabilityScore}%</p>
+            <p>{uni.explanation}</p>
+            <button type="button" className="result-card-more-btn" onClick={() => onMoreInfo(uni)}>
+              More Information
+            </button>
           </article>
         ))}
       </div>
@@ -38,14 +70,16 @@ export function ResultsPage({
           id="results-login-button"
           type="button"
           onClick={onCreateAccountLogin}
+          disabled={saveStatus === "saving" || saveStatus === "saved"}
         >
-          Create and Account / Login
+          {saveButtonLabel[saveStatus]}
         </button>
 
         <button
           id="results-adjust-button"
           type="button"
           onClick={onAdjustPreferences}
+          disabled={saveStatus === "saving"}
         >
           Adjust Preferences
         </button>

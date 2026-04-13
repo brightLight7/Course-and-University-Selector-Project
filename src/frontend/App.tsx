@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useState, useEffect } from "react";
 import { pageNavigationController } from "./controller/pageNavigationController";
 import { Question1Form } from "./view/question-pages/Question1Form";
 import { Question2Form } from "./view/question-pages/Question2Form";
@@ -11,10 +11,11 @@ import { Question8Form } from "./view/question-pages/Question8Form";
 import { Question9Form } from "./view/question-pages/Question9Form";
 import { Question10Form } from "./view/question-pages/Question10Form";
 import { HomePage } from "./view/HomePage";
-import type { RecommendationSet } from "./types/recommendations";
-import { generateRecommendations } from "./services/recommendations";
+import type { RecommendationSet, CourseRecommendation, UniversityRecommendation } from "./types/recommendations";
+import { generateRecommendations, saveResults } from "./services/recommendations";
 import { LoadingScreen } from "./view/LoadingScreen";
 import { ResultsPage } from "./view/ResultsPage";
+import { DetailPage } from "./view/DetailPage";
 
 type FormData = {
   question1Answer: string;
@@ -43,41 +44,42 @@ const INITIAL_DATA: FormData = {
 };
 
 function App() {
-  const [data, setData] = useState(INITIAL_DATA);
+  const ANSWERS_KEY = "quiz_answers";
+  const RESULTS_KEY = "quiz_results";
 
-  const [screen, setScreen] = useState<"home" | "quiz" | "loading" | "results">(
+  const [data, setData] = useState<FormData>(() => {
+    const saved = sessionStorage.getItem(ANSWERS_KEY);
+    return saved ? (JSON.parse(saved) as FormData) : INITIAL_DATA;
+  });
+
+  const [screen, setScreen] = useState<"home" | "quiz" | "loading" | "results" | "detail">(
     "home",
   );
 
-  const [results, setResults] = useState<RecommendationSet | null>(null);
+  const [selectedItem, setSelectedItem] = useState<CourseRecommendation | UniversityRecommendation | null>(null);
+
+  const [results, setResults] = useState<RecommendationSet | null>(() => {
+    const saved = sessionStorage.getItem(RESULTS_KEY);
+    return saved ? (JSON.parse(saved) as RecommendationSet) : null;
+  });
+
   const [submissionError, setSubmissionError] = useState<string | null>(null);
+  const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
+
+  useEffect(() => {
+    sessionStorage.setItem(ANSWERS_KEY, JSON.stringify(data));
+  }, [data]);
+
+  useEffect(() => {
+    if (results) {
+      sessionStorage.setItem(RESULTS_KEY, JSON.stringify(results));
+    }
+  }, [results]);
 
   function updateFields(fields: Partial<FormData>) {
     setData((prev) => {
       return { ...prev, ...fields };
     });
-  }
-
-  type Submission = FormData & {
-    submittedat: string;
-  };
-
-  const STORAGE_KEY = "course_selector_submissions";
-
-  function saveToLocal(data: FormData) {
-    const submission: Submission = {
-      ...data,
-      submittedat: new Date().toISOString(),
-    };
-
-    const existing = JSON.parse(
-      localStorage.getItem(STORAGE_KEY) ?? "[]",
-    ) as Submission[];
-
-    localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify([...existing, submission]),
-    );
   }
 
   const { currentStepIndex, isFirstStep, isLastStep, back, next, goTo } =
@@ -160,7 +162,7 @@ function App() {
 
   const step = steps[currentStepIndex];
 
-  async function onSubmit(e: FormEvent) {
+  async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
 
     if (!isLastStep) {
@@ -186,13 +188,27 @@ function App() {
     }
   }
 
+  function handleMoreInfo(item: CourseRecommendation | UniversityRecommendation) {
+    setSelectedItem(item);
+    setScreen("detail");
+  }
+
   function handleAdjustPreferences() {
     setScreen("quiz");
     goTo(0);
   }
 
-  function handleCreateAccountLogin() {
-    window.alert("Login and saving results will be connected next.");
+  async function handleCreateAccountLogin() {
+    if (!results) return;
+    setSaveStatus("saving");
+    try {
+      await saveResults(results);
+      setSaveStatus("saved");
+      sessionStorage.removeItem(RESULTS_KEY);
+      sessionStorage.removeItem(ANSWERS_KEY);
+    } catch {
+      setSaveStatus("error");
+    }
   }
 
   if (screen === "home") {
@@ -209,11 +225,20 @@ function App() {
       </div>
     );
   }
+  if (screen === "detail" && selectedItem) {
+    return (
+      <div id="app-container">
+        <DetailPage item={selectedItem} onBack={() => setScreen("results")} />
+      </div>
+    );
+  }
   if (screen === "results" && results) {
     return (
       <div id="app-container">
         <ResultsPage
           results={results}
+          saveStatus={saveStatus}
+          onMoreInfo={handleMoreInfo}
           onAdjustPreferences={handleAdjustPreferences}
           onCreateAccountLogin={handleCreateAccountLogin}
         />

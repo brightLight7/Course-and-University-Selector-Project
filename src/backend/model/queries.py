@@ -1,5 +1,17 @@
 from model.database import get_db_connection
 
+def create_attempt():
+    connection = get_db_connection()
+    cursor_connection = connection.cursor()
+    cursor_connection.execute(
+        "INSERT INTO quiz_attempts (started_at) VALUES (NOW()) RETURNING attempt_id"
+    )
+    attempt_id = cursor_connection.fetchone()[0]
+    connection.commit()
+    cursor_connection.close()
+    connection.close()
+    return attempt_id
+
 def get_user_answers(attempt_id): # Define a function to retrieve user answers based on the attempt ID
     connection = get_db_connection() # Get a connection to the database
     cursor_connection = connection.cursor() # Create a cursor object to execute SQL queries

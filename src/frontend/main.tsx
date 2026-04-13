@@ -4,6 +4,7 @@ import App from "./App";
 import "../css/main.css";
 import "../css/loading-screen.css";
 import "../css/results-page.css";
+import "../css/detail-page.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

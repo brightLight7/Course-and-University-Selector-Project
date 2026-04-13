@@ -41,21 +41,22 @@ def map_names_to_ids(recommendations, courses, universities):
     return recommendations
 
 
-def generate_recommendations(user_answers, courses, universities):
+def generate_recommendations(user_answers):
     system_prompt = """
     You are an AI recommendation engine for a Course and University Decision-Support System.
-    Return STRICT JSON only.
-    Recommend both courses and universities.
+    Based on the user's quiz answers, recommend real-world courses and universities that best match their preferences.
+    Use your knowledge of real universities and courses available in the UK and internationally.
+    Return STRICT JSON only. Do not include any text outside JSON.
+    Recommend 3 courses and 3 universities.
     Rank all recommendations in order.
     Include suitability_score from 0 to 100.
-    Include a short explanation for each recommendation.
-    Do not include any text outside JSON.
+    For each recommendation include:
+    - explanation: one sentence summary of why it suits the user
+    - detailed_explanation: a detailed paragraph referencing the user's specific quiz answers and explaining exactly why this course or university is a strong match for them personally
     """
 
     user_prompt = f"""
     Quiz Answers: {json.dumps(user_answers, indent=2)}
-    Available Universities: {json.dumps(universities, indent=2)}
-    Available Courses: {json.dumps(courses, indent=2)}
 
     Return JSON in this format:
     {{
@@ -65,7 +66,8 @@ def generate_recommendations(user_answers, courses, universities):
                 "university_name": "string",
                 "rank_position": 1,
                 "suitability_score": 95,
-                "explanation": "string"
+                "explanation": "string",
+                "detailed_explanation": "string"
             }}
         ],
         "recommended_universities": [
@@ -73,7 +75,8 @@ def generate_recommendations(user_answers, courses, universities):
                 "university_name": "string",
                 "rank_position": 1,
                 "suitability_score": 90,
-                "explanation": "string"
+                "explanation": "string",
+                "detailed_explanation": "string"
             }}
         ]
     }}

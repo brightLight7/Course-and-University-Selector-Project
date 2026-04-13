@@ -31,10 +31,25 @@
 }
 
 .result-card {
+  display: flex;
+  flex-direction: column;
   padding: 1.5rem;
   border: 1px solid #d0d0d0;
   border-radius: 1.5rem;
   background: #f7f7f7;
+}
+
+.result-card-more-btn {
+  margin-top: auto;
+  padding-top: 1rem;
+  width: 100%;
+  padding: 1rem 1.75rem;
+  border: 0;
+  border-radius: 1.25rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  background: #050505;
+  color: #fff;
 }
 
 #results-actions {

@@ -13,14 +13,14 @@ type QuizAnswers = {
   question10Answer: string[];
 };
 
+const API_BASE = "http://127.0.0.1:5000";
+
 export async function generateRecommendations(
   answers: QuizAnswers,
 ): Promise<RecommendationSet> {
-  const response = await fetch("/api/recommendations/generate", {
+  const response = await fetch(`${API_BASE}/api/recommendations/generate`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ answers }),
   });
 
@@ -29,4 +29,16 @@ export async function generateRecommendations(
   }
 
   return (await response.json()) as RecommendationSet;
+}
+
+export async function saveResults(results: RecommendationSet): Promise<void> {
+  const response = await fetch(`${API_BASE}/api/results/save`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ results }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to save results.");
+  }
 }
