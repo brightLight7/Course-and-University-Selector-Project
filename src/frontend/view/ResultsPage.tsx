@@ -1,25 +1,14 @@
 import type { RecommendationSet, CourseRecommendation, UniversityRecommendation } from "../types/recommendations";
 
-type SaveStatus = "idle" | "saving" | "saved" | "error";
-
 type ResultsPageProps = {
   results: RecommendationSet;
-  saveStatus: SaveStatus;
   onAdjustPreferences: () => void;
   onCreateAccountLogin: () => void;
   onMoreInfo: (item: CourseRecommendation | UniversityRecommendation) => void;
 };
 
-const saveButtonLabel: Record<SaveStatus, string> = {
-  idle: "Create an Account / Login",
-  saving: "Saving...",
-  saved: "Results Saved",
-  error: "Save Failed — Try Again",
-};
-
 export function ResultsPage({
   results,
-  saveStatus,
   onAdjustPreferences,
   onCreateAccountLogin,
   onMoreInfo,
@@ -70,16 +59,14 @@ export function ResultsPage({
           id="results-login-button"
           type="button"
           onClick={onCreateAccountLogin}
-          disabled={saveStatus === "saving" || saveStatus === "saved"}
         >
-          {saveButtonLabel[saveStatus]}
+          Create an Account / Login
         </button>
 
         <button
           id="results-adjust-button"
           type="button"
           onClick={onAdjustPreferences}
-          disabled={saveStatus === "saving"}
         >
           Adjust Preferences
         </button>

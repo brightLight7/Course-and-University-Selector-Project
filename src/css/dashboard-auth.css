@@ -1,0 +1,159 @@
+/* ── Dashboard ── */
+
+#dashboard-page {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+#dashboard-name {
+  margin: 0;
+  font-size: clamp(2rem, 3vw, 3rem);
+  font-weight: 700;
+  color: #111;
+  text-align: center;
+}
+
+#dashboard-saves {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.save-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.5rem;
+  border: 1px solid #d0d0d0;
+  border-radius: 1.5rem;
+  background: #f7f7f7;
+}
+
+.save-card-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #111;
+}
+
+.save-card-detail {
+  margin: 0;
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.5;
+}
+
+.save-card-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+
+.save-card-btn {
+  padding: 0.75rem 1.5rem;
+  border: 1px solid #c0c0c0;
+  border-radius: 2rem;
+  background: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #111;
+}
+
+.save-card-btn:hover {
+  background: #f0f0f0;
+}
+
+#dashboard-new-quiz-btn {
+  width: 100%;
+  max-width: 30rem;
+  margin: 0 auto;
+  padding: 1.1rem 1.75rem;
+  border: 0;
+  border-radius: 1.25rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  background: #050505;
+  color: #fff;
+}
+
+/* ── Auth ── */
+
+#auth-page {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 28rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+#auth-title {
+  margin: 0;
+  font-size: clamp(2rem, 3vw, 3rem);
+  font-weight: 700;
+  color: #111;
+  text-align: center;
+}
+
+#auth-toggle {
+  display: flex;
+  border: 1px solid #d0d0d0;
+  border-radius: 2rem;
+  overflow: hidden;
+}
+
+.auth-toggle-btn {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 0;
+  background: transparent;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #555;
+  border-radius: 2rem;
+}
+
+.auth-toggle-btn--active {
+  background: #050505;
+  color: #fff;
+}
+
+#auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.auth-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.auth-field label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.auth-field input {
+  padding: 0.85rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #b8b8b8;
+  border-radius: 0.85rem;
+  background: #fff;
+}
+
+#auth-submit-btn {
+  width: 100%;
+  padding: 1.1rem 1.75rem;
+  border: 0;
+  border-radius: 1.25rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  background: #050505;
+  color: #fff;
+  margin-top: 0.5rem;
+}

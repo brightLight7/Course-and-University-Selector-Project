@@ -1,9 +1,10 @@
 import homeImage from "../../assets/page-pictures/home-page/home-image.png";
 type HomePageProps = {
   onStart: () => void;
+  onLogin: () => void;
 };
 
-export function HomePage({ onStart }: HomePageProps) {
+export function HomePage({ onStart, onLogin }: HomePageProps) {
   return (
     <section id="home-page">
       <h1 id="home-title">University and Course Selector</h1>
@@ -38,7 +39,7 @@ export function HomePage({ onStart }: HomePageProps) {
 
       <p id="home-login-text">View your existing quiz results</p>
 
-      <button id="home-login-button" type="button">
+      <button id="home-login-button" type="button" onClick={onLogin}>
         Login
       </button>
     </section>

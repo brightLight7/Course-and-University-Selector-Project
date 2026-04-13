@@ -12,10 +12,13 @@ import { Question9Form } from "./view/question-pages/Question9Form";
 import { Question10Form } from "./view/question-pages/Question10Form";
 import { HomePage } from "./view/HomePage";
 import type { RecommendationSet, CourseRecommendation, UniversityRecommendation } from "./types/recommendations";
-import { generateRecommendations, saveResults } from "./services/recommendations";
+import { generateRecommendations } from "./services/recommendations";
 import { LoadingScreen } from "./view/LoadingScreen";
 import { ResultsPage } from "./view/ResultsPage";
 import { DetailPage } from "./view/DetailPage";
+import { AuthPage } from "./view/AuthPage";
+import { DashboardPage } from "./view/DashboardPage";
+import type { SavedResult } from "./view/DashboardPage";
 
 type FormData = {
   question1Answer: string;
@@ -52,7 +55,7 @@ function App() {
     return saved ? (JSON.parse(saved) as FormData) : INITIAL_DATA;
   });
 
-  const [screen, setScreen] = useState<"home" | "quiz" | "loading" | "results" | "detail">(
+  const [screen, setScreen] = useState<"home" | "quiz" | "loading" | "results" | "detail" | "auth" | "dashboard">(
     "home",
   );
 
@@ -64,7 +67,8 @@ function App() {
   });
 
   const [submissionError, setSubmissionError] = useState<string | null>(null);
-  const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
+  const [firstName, setFirstName] = useState("");
+  const [savedResults, setSavedResults] = useState<SavedResult[]>([]);
 
   useEffect(() => {
     sessionStorage.setItem(ANSWERS_KEY, JSON.stringify(data));
@@ -198,23 +202,62 @@ function App() {
     goTo(0);
   }
 
-  async function handleCreateAccountLogin() {
-    if (!results) return;
-    setSaveStatus("saving");
-    try {
-      await saveResults(results);
-      setSaveStatus("saved");
-      sessionStorage.removeItem(RESULTS_KEY);
-      sessionStorage.removeItem(ANSWERS_KEY);
-    } catch {
-      setSaveStatus("error");
-    }
+  function buildSavedResultsFromSession(): SavedResult[] {
+    const raw = sessionStorage.getItem(RESULTS_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw) as RecommendationSet;
+    return [
+      {
+        attemptId: Date.now(),
+        courses: parsed.recommendedCourses.map((c) => c.courseName),
+        universities: parsed.recommendedUniversities.map((u) => u.universityName),
+      },
+    ];
+  }
+
+  function handleLogin(email: string, _password: string) {
+    // TODO: call backend auth endpoint
+    const name = email.split("@")[0];
+    setFirstName(name);
+    setSavedResults(buildSavedResultsFromSession());
+    setScreen("dashboard");
+  }
+
+  function handleSignUp(newFirstName: string, _email: string, _password: string) {
+    // TODO: call backend auth endpoint
+    setFirstName(newFirstName);
+    setSavedResults(buildSavedResultsFromSession());
+    setScreen("dashboard");
+  }
+
+  function handleCreateAccountLogin() {
+    setScreen("auth");
   }
 
   if (screen === "home") {
     return (
       <div id="app-container">
-        <HomePage onStart={() => setScreen("quiz")} />
+        <HomePage onStart={() => setScreen("quiz")} onLogin={() => setScreen("auth")} />
+      </div>
+    );
+  }
+  if (screen === "auth") {
+    return (
+      <div id="app-container">
+        <AuthPage onLogin={handleLogin} onSignUp={handleSignUp} />
+      </div>
+    );
+  }
+  if (screen === "dashboard") {
+    return (
+      <div id="app-container">
+        <DashboardPage
+          firstName={firstName}
+          savedResults={savedResults}
+          onViewResults={() => setScreen("results")}
+          onAdjustPreferences={() => { setScreen("quiz"); goTo(0); }}
+          onNewQuiz={() => setScreen("quiz")}
+        />
       </div>
     );
   }
@@ -237,7 +280,6 @@ function App() {
       <div id="app-container">
         <ResultsPage
           results={results}
-          saveStatus={saveStatus}
           onMoreInfo={handleMoreInfo}
           onAdjustPreferences={handleAdjustPreferences}
           onCreateAccountLogin={handleCreateAccountLogin}
