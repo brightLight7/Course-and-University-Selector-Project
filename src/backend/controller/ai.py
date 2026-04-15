@@ -41,11 +41,11 @@ def map_names_to_ids(recommendations, courses, universities):
     return recommendations
 
 
-def generate_recommendations(user_answers):
+def generate_recommendations(user_answers, courses, universities):
     system_prompt = """
     You are an AI recommendation engine for a Course and University Decision-Support System.
-    Based on the user's quiz answers, recommend real-world courses and universities that best match their preferences.
-    Use your knowledge of real universities and courses available in the UK and internationally.
+    You must ONLY recommend courses and universities from the provided dataset.
+    Do not suggest any course or university not in the lists below.
     Return STRICT JSON only. Do not include any text outside JSON.
     Recommend 3 courses and 3 universities.
     Rank all recommendations in order.
@@ -57,6 +57,12 @@ def generate_recommendations(user_answers):
 
     user_prompt = f"""
     Quiz Answers: {json.dumps(user_answers, indent=2)}
+
+    Available Courses (only recommend from this list):
+    {json.dumps([{"course_name": c["course_name"], "university_name": c["university_name"]} for c in courses], indent=2)}
+
+    Available Universities (only recommend from this list):
+    {json.dumps([{"university_name": u["university_name"]} for u in universities], indent=2)}
 
     Return JSON in this format:
     {{

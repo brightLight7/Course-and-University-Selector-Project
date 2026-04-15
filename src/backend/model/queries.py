@@ -1,10 +1,74 @@
 from model.database import get_db_connection
 
-def create_attempt():
+def signup_user(first_name, email, password_hash):
     connection = get_db_connection()
     cursor_connection = connection.cursor()
     cursor_connection.execute(
-        "INSERT INTO quiz_attempts (started_at) VALUES (NOW()) RETURNING attempt_id"
+        """
+        INSERT INTO users (first_name, email, password_hash, created_at, updated_at)
+        VALUES (%s, %s, %s, NOW(), NOW())
+        RETURNING user_id, first_name, email
+        """,
+        (first_name, email, password_hash)
+    )
+    row = cursor_connection.fetchone()
+    connection.commit()
+    cursor_connection.close()
+    connection.close()
+    return {"user_id": row[0], "first_name": row[1], "email": row[2]}
+
+def get_user_saves(user_id):
+    connection = get_db_connection()
+    cursor_connection = connection.cursor()
+    cursor_connection.execute(
+        """
+        SELECT
+            qa.attempt_id,
+            array_agg(DISTINCT c.course_name) FILTER (WHERE c.course_name IS NOT NULL) AS courses,
+            array_agg(DISTINCT u.university_name) FILTER (WHERE u.university_name IS NOT NULL) AS universities
+        FROM quiz_attempts qa
+        LEFT JOIN course_results cr ON cr.attempt_id = qa.attempt_id
+        LEFT JOIN courses c ON c.course_id = cr.course_id
+        LEFT JOIN university_results ur ON ur.attempt_id = qa.attempt_id
+        LEFT JOIN universities u ON u.university_id = ur.university_id
+        WHERE qa.user_id = %s
+        GROUP BY qa.attempt_id
+        ORDER BY qa.attempt_id
+        """,
+        (user_id,)
+    )
+    rows = cursor_connection.fetchall()
+    cursor_connection.close()
+    connection.close()
+    return [
+        {
+            "attemptId": row[0],
+            "courses": row[1] or [],
+            "universities": row[2] or [],
+        }
+        for row in rows
+    ]
+
+def get_user_by_email(email):
+    connection = get_db_connection()
+    cursor_connection = connection.cursor()
+    cursor_connection.execute(
+        "SELECT user_id, first_name, email, password_hash FROM users WHERE email = %s",
+        (email,)
+    )
+    row = cursor_connection.fetchone()
+    cursor_connection.close()
+    connection.close()
+    if row is None:
+        return None
+    return {"user_id": row[0], "first_name": row[1], "email": row[2], "password_hash": row[3]}
+
+def create_attempt(user_id=None):
+    connection = get_db_connection()
+    cursor_connection = connection.cursor()
+    cursor_connection.execute(
+        "INSERT INTO quiz_attempts (user_id, started_at) VALUES (%s, NOW()) RETURNING attempt_id",
+        (user_id,)
     )
     attempt_id = cursor_connection.fetchone()[0]
     connection.commit()
@@ -50,7 +114,7 @@ def get_courses():
             c.discipline,
             c.teaching_method_summary,
             c.assessment_method_summary,
-            c.career_outcomes_summary,
+            c.career_outcome_summary,
             u.university_name
         FROM courses c
         JOIN universities u ON c.university_id = u.university_id
