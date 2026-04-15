@@ -12,7 +12,8 @@ import { Question9Form } from "./view/question-pages/Question9Form";
 import { Question10Form } from "./view/question-pages/Question10Form";
 import { HomePage } from "./view/HomePage";
 import type { RecommendationSet, CourseRecommendation, UniversityRecommendation } from "./types/recommendations";
-import { generateRecommendations } from "./services/recommendations";
+import { generateRecommendations, saveResults } from "./services/recommendations";
+import { login, signUp, fetchUserSaves } from "./services/auth";
 import { LoadingScreen } from "./view/LoadingScreen";
 import { ResultsPage } from "./view/ResultsPage";
 import { DetailPage } from "./view/DetailPage";
@@ -68,6 +69,7 @@ function App() {
 
   const [submissionError, setSubmissionError] = useState<string | null>(null);
   const [firstName, setFirstName] = useState("");
+  const [userId, setUserId] = useState<number | null>(null);
   const [savedResults, setSavedResults] = useState<SavedResult[]>([]);
 
   useEffect(() => {
@@ -202,36 +204,46 @@ function App() {
     goTo(0);
   }
 
-  function buildSavedResultsFromSession(): SavedResult[] {
+async function saveSessionResults(id: number): Promise<void> {
     const raw = sessionStorage.getItem(RESULTS_KEY);
-    if (!raw) return [];
+    if (!raw) return;
     const parsed = JSON.parse(raw) as RecommendationSet;
-    return [
-      {
-        attemptId: Date.now(),
-        courses: parsed.recommendedCourses.map((c) => c.courseName),
-        universities: parsed.recommendedUniversities.map((u) => u.universityName),
-      },
-    ];
+    await saveResults(parsed, id);
+    sessionStorage.removeItem(RESULTS_KEY);
+    sessionStorage.removeItem(ANSWERS_KEY);
   }
 
-  function handleLogin(email: string, _password: string) {
-    // TODO: call backend auth endpoint
-    const name = email.split("@")[0];
-    setFirstName(name);
-    setSavedResults(buildSavedResultsFromSession());
+  async function handleLogin(email: string, password: string): Promise<void> {
+    const user = await login(email, password);
+    setFirstName(user.firstName);
+    setUserId(user.userId);
+    await saveSessionResults(user.userId);
+    const saves = await fetchUserSaves(user.userId);
+    setSavedResults(saves);
     setScreen("dashboard");
   }
 
-  function handleSignUp(newFirstName: string, _email: string, _password: string) {
-    // TODO: call backend auth endpoint
-    setFirstName(newFirstName);
-    setSavedResults(buildSavedResultsFromSession());
+  async function handleSignUp(newFirstName: string, email: string, password: string): Promise<void> {
+    const user = await signUp(newFirstName, email, password);
+    setFirstName(user.firstName);
+    setUserId(user.userId);
+    await saveSessionResults(user.userId);
+    const saves = await fetchUserSaves(user.userId);
+    setSavedResults(saves);
     setScreen("dashboard");
   }
 
-  function handleCreateAccountLogin() {
-    setScreen("auth");
+  async function handleCreateAccountLogin() {
+    if (userId && results) {
+      await saveResults(results, userId);
+      const saves = await fetchUserSaves(userId);
+      setSavedResults(saves);
+      sessionStorage.removeItem(RESULTS_KEY);
+      sessionStorage.removeItem(ANSWERS_KEY);
+      setScreen("dashboard");
+    } else {
+      setScreen("auth");
+    }
   }
 
   if (screen === "home") {
@@ -256,7 +268,7 @@ function App() {
           savedResults={savedResults}
           onViewResults={() => setScreen("results")}
           onAdjustPreferences={() => { setScreen("quiz"); goTo(0); }}
-          onNewQuiz={() => setScreen("quiz")}
+          onNewQuiz={() => { setData(INITIAL_DATA); goTo(0); setScreen("quiz"); }}
         />
       </div>
     );

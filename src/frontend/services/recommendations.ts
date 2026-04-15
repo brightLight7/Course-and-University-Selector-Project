@@ -31,11 +31,11 @@ export async function generateRecommendations(
   return (await response.json()) as RecommendationSet;
 }
 
-export async function saveResults(results: RecommendationSet): Promise<void> {
+export async function saveResults(results: RecommendationSet, userId: number): Promise<void> {
   const response = await fetch(`${API_BASE}/api/results/save`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ results }),
+    body: JSON.stringify({ results, userId }),
   });
 
   if (!response.ok) {
