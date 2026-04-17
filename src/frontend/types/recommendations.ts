@@ -4,6 +4,7 @@ export type CourseRecommendation = {
   suitabilityScore: number;
   explanation: string;
   detailedExplanation: string;
+  assessmentMethodSummary?: string;
 };
 
 export type UniversityRecommendation = {

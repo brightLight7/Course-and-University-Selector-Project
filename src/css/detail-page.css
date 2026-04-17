@@ -37,7 +37,8 @@
 }
 
 #detail-summary h3,
-#detail-breakdown h3 {
+#detail-breakdown h3,
+#detail-assessment h3 {
   margin: 0 0 0.75rem 0;
   font-size: 1.4rem;
   font-weight: 700;
@@ -45,7 +46,8 @@
 }
 
 #detail-summary p,
-#detail-breakdown p {
+#detail-breakdown p,
+#detail-assessment p {
   margin: 0;
   font-size: 1.2rem;
   line-height: 1.7;

@@ -18,6 +18,29 @@
   text-align: center;
 }
 
+#results-reassurance {
+  max-width: 48rem;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  color: #383838;
+  text-align: center;
+}
+
+#results-last-updated {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #888;
+  text-align: center;
+}
+
+.result-card-tier {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
 .results-section-title {
   margin: 0;
   font-size: clamp(1.6rem, 2.2vw, 2.1rem);
@@ -58,7 +81,8 @@
 }
 
 #results-login-button,
-#results-adjust-button {
+#results-adjust-button,
+#results-start-again-button {
   width: 100%;
   padding: 1.1rem 1.75rem;
   border: 0;
@@ -73,6 +97,11 @@
 }
 
 #results-adjust-button {
+  background: #d9d9d9;
+  color: #111;
+}
+
+#results-start-again-button {
   background: #d9d9d9;
   color: #111;
 }

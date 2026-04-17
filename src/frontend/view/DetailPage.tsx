@@ -30,6 +30,13 @@ export function DetailPage({ item, onBack }: DetailPageProps) {
         <p>{item.detailedExplanation}</p>
       </div>
 
+      {isCourse(item) && item.assessmentMethodSummary && (
+        <div id="detail-assessment">
+          <h3>Assessment Methods</h3>
+          <p>{item.assessmentMethodSummary}</p>
+        </div>
+      )}
+
       <button id="detail-back-button" type="button" onClick={onBack}>
         ← Back to Results
       </button>

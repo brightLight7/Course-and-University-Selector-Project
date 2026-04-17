@@ -295,6 +295,7 @@ async function saveSessionResults(id: number): Promise<void> {
           onMoreInfo={handleMoreInfo}
           onAdjustPreferences={handleAdjustPreferences}
           onCreateAccountLogin={handleCreateAccountLogin}
+          onStartAgain={() => { setData(INITIAL_DATA); setResults(null); goTo(0); setScreen("quiz"); }}
         />
       </div>
     );

@@ -23,6 +23,11 @@ def generate():
 
     recommendations = generate_recommendations(user_answers, courses, universities)
 
+    assessment_lookup = {
+        (c["course_name"], c["university_name"]): c["assessment_method_summary"]
+        for c in courses
+    }
+
     return jsonify({
         "recommendedCourses": [
             {
@@ -31,6 +36,7 @@ def generate():
                 "suitabilityScore": course["suitability_score"],
                 "explanation": course["explanation"],
                 "detailedExplanation": course["detailed_explanation"],
+                "assessmentMethodSummary": assessment_lookup.get((course["course_name"], course["university_name"])),
             }
             for course in recommendations["recommended_courses"]
         ],
