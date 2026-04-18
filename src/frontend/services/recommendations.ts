@@ -13,7 +13,7 @@ type QuizAnswers = {
   question10Answer: string[];
 };
 
-const API_BASE = "http://127.0.0.1:5000";
+const API_BASE = "https://course-selector-api.onrender.com";
 
 export async function generateRecommendations(
   answers: QuizAnswers,
