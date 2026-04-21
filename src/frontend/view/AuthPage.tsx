@@ -2,7 +2,11 @@ import { useState } from "react";
 
 type AuthPageProps = {
   onLogin: (email: string, password: string) => Promise<void>;
-  onSignUp: (firstName: string, email: string, password: string) => Promise<void>;
+  onSignUp: (
+    firstName: string,
+    email: string,
+    password: string,
+  ) => Promise<void>;
 };
 
 export function AuthPage({ onLogin, onSignUp }: AuthPageProps) {
@@ -16,8 +20,8 @@ export function AuthPage({ onLogin, onSignUp }: AuthPageProps) {
   const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setError(null);
+    e.preventDefault(); // stop the browser from reloading the page on form submit
+    setError(null);     // clear any previous error before the new attempt
 
     if (mode === "signup" && password !== confirmPassword) {
       setError("Passwords do not match.");
@@ -40,9 +44,9 @@ export function AuthPage({ onLogin, onSignUp }: AuthPageProps) {
 
   function switchMode(newMode: "login" | "signup") {
     setMode(newMode);
-    setError(null);
-    setShowPassword(false);
-    setConfirmPassword("");
+    setError(null); // clear any error from the previous mode
+    setShowPassword(false); // reset so password is hidden when switching modes
+    setConfirmPassword(""); // clear confirm field — only exists in signup mode
   }
 
   return (
@@ -54,6 +58,7 @@ export function AuthPage({ onLogin, onSignUp }: AuthPageProps) {
       <div id="auth-toggle">
         <button
           type="button"
+          // appends --active modifier to base class when this mode is selected
           className={`auth-toggle-btn${mode === "login" ? " auth-toggle-btn--active" : ""}`}
           onClick={() => switchMode("login")}
         >
@@ -131,7 +136,11 @@ export function AuthPage({ onLogin, onSignUp }: AuthPageProps) {
         {error && <p id="auth-error">{error}</p>}
 
         <button id="auth-submit-btn" type="submit" disabled={loading}>
-          {loading ? "Please wait..." : mode === "login" ? "Login" : "Create Account"}
+          {loading
+            ? "Please wait..."
+            : mode === "login"
+              ? "Login"
+              : "Create Account"}
         </button>
       </form>
     </section>

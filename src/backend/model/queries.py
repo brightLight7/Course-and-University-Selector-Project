@@ -24,9 +24,12 @@ def get_user_saves(user_id):
         """
         SELECT
             qa.attempt_id,
+            -- Collect unique course names saved in this attempt, ignoring nulls (attempt has no courses)
             array_agg(DISTINCT c.course_name) FILTER (WHERE c.course_name IS NOT NULL) AS courses,
+            -- Collect unique university names saved in this attempt, ignoring nulls
             array_agg(DISTINCT u.university_name) FILTER (WHERE u.university_name IS NOT NULL) AS universities
         FROM quiz_attempts qa
+        -- LEFT JOINs so attempts with no saved results still appear
         LEFT JOIN course_results cr ON cr.attempt_id = qa.attempt_id
         LEFT JOIN courses c ON c.course_id = cr.course_id
         LEFT JOIN university_results ur ON ur.attempt_id = qa.attempt_id
